@@ -1,17 +1,16 @@
 import React from 'react';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import DashboardPage from '../DashboardPage';
+import DetailsPage from '../DetailsPage';
+import NotFoundPage from '../NotFoundPage';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <main className="w-full h-full">
-      <h1>Header 1</h1>
-      <h2>Header 2</h2>
-      <h3>Header 3</h3>
-      <p>normal text</p>
-      <p className="text-small">small text</p>
-      <a href="#">simple link</a>
-      <button className="button">simple button</button>
-    </main>
+    <Routes>
+      <Route path="/" element={<DashboardPage />} />
+      <Route path="/:ticker" element={<DetailsPage />} />
+      <Route path="/404" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
