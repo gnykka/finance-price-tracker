@@ -3,19 +3,19 @@ import { Ticker } from './types';
 
 class Store {
   tickers: Ticker[] = [
-    { id: 'AAPL', name: 'Apple Inc.', price: 0 },
-    { id: 'GOOGL', name: 'Alphabet Inc.', price: 0 },
+    { id: 'AAPL', name: 'Apple Inc.' },
+    { id: 'GOOGL', name: 'Alphabet Inc.' },
   ];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  updatePrice(tickerId: string, newPrice: number) {
-    const ticker = this.tickers.find((t) => t.id === tickerId);
+  updateTicker(tickerId: string, newData: Partial<Ticker>) {
+    const index = this.tickers.findIndex((t) => t.id === tickerId);
 
-    if (ticker) {
-      ticker.price = newPrice;
+    if (index !== -1) {
+      this.tickers[index] = { ...this.tickers[index], ...newData };
     }
   }
 }

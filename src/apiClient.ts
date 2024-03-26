@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+import { TickerQuoteResponse } from './types';
 
 type FetchOptions = {
   endpoint: string;
@@ -13,12 +14,11 @@ class ApiClient {
   options: RequestInit;
 
   constructor() {
-    this.baseUrl = 'https://finnhub.io/api/v1';
+    this.baseUrl = 'https://eodhd.com/api';
     this.options = {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'X-Finnhub-Token': process.env.REACT_APP_FINNHUB_API_KEY || '',
       },
     };
   }
@@ -31,7 +31,11 @@ class ApiClient {
 
   async fetch({ endpoint, ...options }: FetchOptions): Promise<any> {
     const { query = {}, body, ...fetchOptions } = options;
-    const url = this.url(endpoint, query);
+    const defaultQuery = {
+      fmt: 'json',
+      api_token: process.env.REACT_APP_API_KEY || '',
+    };
+    const url = this.url(endpoint, { ...query, ...defaultQuery });
 
     const response = await fetch(url, {
       ...this.options,
@@ -51,4 +55,8 @@ class ApiClient {
 
 const api = new ApiClient();
 
-export const getTickerQuote = async (symbol: string) => api.get('/quote', { symbol });
+export const getTickerQuotes = async (tickers: string[]) => {
+  const [ticker, ...otherTickets] = tickers;
+
+  return api.get(`/real-time/${ticker}`, { s: otherTickets.join(',') });
+};

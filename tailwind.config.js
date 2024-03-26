@@ -3,7 +3,11 @@ module.exports = {
   important: true,
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'spin-slow': 'spin 1s linear infinite',
+      },
+    },
     screens: {
       sm: '480px',
       md: '768px',

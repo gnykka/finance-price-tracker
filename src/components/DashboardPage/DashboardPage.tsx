@@ -8,7 +8,7 @@ const DashboardPage: React.FC = observer(() => {
   const store = useContext(StoreContext);
 
   return (
-    <main className="h-full px-6 py-4">
+    <div className="h-full px-6 py-4">
       <h1 className="mb-8">Tickers List</h1>
       <table className="max-w-[800px]">
         <thead>
@@ -26,15 +26,15 @@ const DashboardPage: React.FC = observer(() => {
             <tr key={ticker.id}>
               <td><Link to={`/${ticker.id}`}>{ticker.id}</Link></td>
               <td>{ticker.name}</td>
-              <td className="numeric">${ticker.price.toFixed(2)}</td>
-              <td className="numeric"></td>
-              <td className="numeric"></td>
+              <td className="numeric">${(ticker.price || 0).toFixed(2)}</td>
+              <td className="numeric">{(ticker.change || 0).toFixed(2)}%</td>
+              <td className="numeric">{ticker.volume || 0}</td>
               <td></td>
             </tr>
           ))}
         </tbody>
       </table>
-    </main>
+    </div>
   );
 });
 
