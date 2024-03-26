@@ -15,20 +15,25 @@ const DashboardPage: React.FC = observer(() => {
           <tr>
             <th>Ticker</th>
             <th>Name</th>
-            <th>Price</th>
-            <th>Change</th>
-            <th>Volume</th>
-            <th>Sparkline</th>
+            <th className="text-right">Price</th>
+            <th className="text-right">Change</th>
+            <th className="text-right">Volume</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {store.tickers.map((ticker: Ticker) => (
-            <tr key={ticker.id}>
-              <td><Link to={`/${ticker.id}`}>{ticker.id}</Link></td>
-              <td>{ticker.name}</td>
-              <td className="numeric">${(ticker.price || 0).toFixed(2)}</td>
-              <td className="numeric">{(ticker.change || 0).toFixed(2)}%</td>
-              <td className="numeric">{ticker.volume || 0}</td>
+          {store.tickers.map(({
+            id, name, price = 0, change = 0, volume = 0,
+          }: Ticker) => (
+            <tr key={id}>
+              <td><Link to={`/${id}`}>{id}</Link></td>
+              <td>{name}</td>
+              <td className="numeric">${price.toFixed(2)}</td>
+              <td className={`numeric text-gray-400 ${change > 0 && 'text-green'}
+                              ${change < 0 && 'text-red'}`}>
+                {change.toFixed(2)}%
+              </td>
+              <td className="numeric">{Intl.NumberFormat().format(volume)}</td>
               <td></td>
             </tr>
           ))}

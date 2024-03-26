@@ -5,6 +5,7 @@ class Store {
   tickers: Ticker[] = [
     { id: 'AAPL', name: 'Apple Inc.' },
     { id: 'GOOGL', name: 'Alphabet Inc.' },
+    { id: 'MSFT', name: 'Microsoft Corp.' },
   ];
 
   constructor() {
