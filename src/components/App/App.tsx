@@ -3,22 +3,24 @@ import { Routes, Route } from 'react-router-dom';
 import DashboardPage from '../DashboardPage';
 import DetailsPage from '../DetailsPage';
 import NotFoundPage from '../NotFoundPage';
+import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
+import { getTickerQuote } from '../../apiClient';
 
 const App: React.FC = () => {
   const store = useContext(StoreContext);
 
   useEffect(() => {
-    setInterval(() => {
-      const data = [
-        { id: 'AAPL', price: Math.random() * 100 },
-        { id: 'GOOGL', price: Math.random() * 100 },
-      ];
+    const ids: string[] = store.tickers.map((t: Ticker) => t.id);
 
-      data.forEach((v) => {
-        store.updatePrice(v.id, v.price);
-      });
-    }, 3000);
+    ids.forEach((id) => {
+      getTickerQuote(id).then((res) => console.log(res));
+    });
+    /*
+    data.forEach((v) => {
+      store.updatePrice(v.id, v.price);
+    });
+    */
   }, [store]);
 
   return (
