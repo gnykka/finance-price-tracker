@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
@@ -7,26 +7,34 @@ import { StoreContext } from '../../storeContext';
 const DashboardPage: React.FC = observer(() => {
   const store = useContext(StoreContext);
 
-  useEffect(() => {
-    const data = [
-      { id: 'AAPL', price: 150 },
-      { id: 'GOOGL', price: 100 },
-    ];
-
-    data.forEach((v) => {
-      store.updatePrice(v.id, v.price);
-    });
-  }, [store]);
-
   return (
-    <div>
-      <h1>List of Tickers</h1>
-      {store.tickers.map((ticker: Ticker) => (
-        <div key={ticker.id}>
-          <Link to={`/${ticker.id}`}>{ticker.id} | {ticker.name} | ${ticker.price}</Link>
-        </div>
-      ))}
-    </div>
+    <main className="h-full px-6 py-4">
+      <h1 className="mb-8">Tickers List</h1>
+      <table className="max-w-[800px]">
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volume</th>
+            <th>Sparkline</th>
+          </tr>
+        </thead>
+        <tbody>
+          {store.tickers.map((ticker: Ticker) => (
+            <tr key={ticker.id}>
+              <td><Link to={`/${ticker.id}`}>{ticker.id}</Link></td>
+              <td>{ticker.name}</td>
+              <td className="numeric">${ticker.price.toFixed(2)}</td>
+              <td className="numeric"></td>
+              <td className="numeric"></td>
+              <td></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
   );
 });
 

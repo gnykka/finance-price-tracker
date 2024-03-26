@@ -32,7 +32,7 @@
   }
 
   a {
-    @apply w-fit relative text-primary-600 hover:text-primary-400
+    @apply w-fit relative text-accent-600 hover:text-accent-500
       transition-all cursor-pointer outline-none;
   }
 }
@@ -40,7 +40,27 @@
 @layer components {
   .button {
     @apply flex items-center justify-center w-fit px-4 py-2 rounded
-      bg-primary-300 hover:bg-primary-400 transition-all;
+      uppercase tracking-wide text-white bg-accent-800 hover:bg-accent-700 transition-all;
+  }
+
+  table {
+    @apply w-full;
+
+    th, td {
+      @apply px-2 font-normal text-left border-b;
+    }
+
+    th {
+      @apply py-1 text-small text-gray-600 border-b-gray-400;
+    }
+
+    td {
+      @apply py-2 border-b-gray-200;
+
+      &.numeric {
+        @apply text-right;
+      }
+    }
   }
 }
 
