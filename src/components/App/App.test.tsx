@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { store } from '../../store';
 import App from './App';
@@ -11,7 +11,7 @@ describe('App.jsx', () => {
     render(
       <BrowserRouter>
         <App />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     expect(screen.getByText(/List of Tickers/i)).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe('App.jsx', () => {
     render(
       <BrowserRouter>
         <App />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     expect(screen.getByText(ticker.name)).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('App.jsx', () => {
       <BrowserRouter>
         <App />
       </BrowserRouter>,
-    )
+    );
 
     expect(screen.getByText(/Ticker Not Found/i)).toBeInTheDocument();
     expect(window.location.pathname).toEqual('/404');
