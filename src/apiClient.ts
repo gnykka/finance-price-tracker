@@ -1,9 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-import { TickerQuoteResponse } from './types';
-
+type Params = Record<string, string>;
 type FetchOptions = {
   endpoint: string;
-  query?: Record<string, string>;
+  query?: Params;
   body?: BodyInit;
   method?: string;
 };
@@ -23,7 +21,7 @@ class ApiClient {
     };
   }
 
-  url(endpoint: string, query: Record<string, string> = {}): string {
+  url(endpoint: string, query: Params = {}): string {
     const url = new URL(`${this.baseUrl}${endpoint}`);
     url.search = new URLSearchParams(query).toString();
     return url.toString();
@@ -48,13 +46,14 @@ class ApiClient {
     return result;
   }
 
-  async get(endpoint: string, params: Record<string, string> = {}): Promise<any> {
+  async get(endpoint: string, params: Params = {}): Promise<any> {
     return this.fetch({ endpoint, method: 'GET', query: params });
   }
 }
 
 const api = new ApiClient();
 
+/* eslint-disable import/prefer-default-export */
 export const getTickerQuotes = async (tickers: string[]) => {
   const [ticker, ...otherTickets] = tickers;
 

@@ -5,7 +5,7 @@ import store from '../../store';
 import App from './App';
 
 describe('App.jsx', () => {
-  test('renders DashboardPage for route "/"', () => {
+  test('it renders DashboardPage for route "/"', () => {
     window.history.pushState({}, '', '/');
 
     render(
@@ -14,11 +14,11 @@ describe('App.jsx', () => {
       </BrowserRouter>,
     );
 
-    expect(screen.getByText(/List of Tickers/i)).toBeInTheDocument();
+    expect(screen.getByText(/Tickers List/i)).toBeInTheDocument();
     expect(window.location.pathname).toEqual('/');
   });
 
-  test('renders DashboardDetailsPage for route "/:tickerId"', () => {
+  test('it renders DashboardDetailsPage for route "/:tickerId"', () => {
     const ticker = store.tickers[0];
 
     window.history.pushState({}, '', `/${ticker.id}`);
@@ -33,7 +33,7 @@ describe('App.jsx', () => {
     expect(window.location.pathname).toEqual(`/${ticker.id}`);
   });
 
-  test('redirects to 404 page for other routes', async () => {
+  test('it redirects to 404 page for other routes', async () => {
     window.history.pushState({}, '', '/test');
 
     render(
