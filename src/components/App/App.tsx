@@ -7,7 +7,7 @@ import NotFoundPage from '../NotFoundPage';
 const App: React.FC = () => (
   <Routes>
     <Route path="/" element={<DashboardPage />} />
-    <Route path="/:ticker" element={<DetailsPage />} />
+    <Route path="/:tickerId" element={<DetailsPage />} />
     <Route path="/404" element={<NotFoundPage />} />
   </Routes>
 );

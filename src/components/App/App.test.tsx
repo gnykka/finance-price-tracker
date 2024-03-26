@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { store } from '../../store';
+import store from '../../store';
 import App from './App';
 
 describe('App.jsx', () => {
@@ -18,7 +18,7 @@ describe('App.jsx', () => {
     expect(window.location.pathname).toEqual('/');
   });
 
-  test('renders DashboardDetailsPage for route "/:ticker"', () => {
+  test('renders DashboardDetailsPage for route "/:tickerId"', () => {
     const ticker = store.tickers[0];
 
     window.history.pushState({}, '', `/${ticker.id}`);
