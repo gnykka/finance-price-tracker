@@ -17,7 +17,7 @@ const DashboardPage: React.FC = observer(() => {
             <th>Name</th>
             <th className="text-right">Price</th>
             <th className="text-right">Change</th>
-            <th className="text-right">Volume</th>
+            <th className="hidden md:block text-right">Volume</th>
             <th></th>
           </tr>
         </thead>
@@ -33,7 +33,7 @@ const DashboardPage: React.FC = observer(() => {
                               ${change < 0 && 'text-red'}`}>
                 {change.toFixed(2)}%
               </td>
-              <td className="numeric">{Intl.NumberFormat().format(volume)}</td>
+              <td className="numeric hidden md:block">{Intl.NumberFormat().format(volume)}</td>
               <td></td>
             </tr>
           ))}

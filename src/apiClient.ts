@@ -7,9 +7,9 @@ type FetchOptions = {
 };
 
 class ApiClient {
-  baseUrl: string;
+  private baseUrl: string;
 
-  options: RequestInit;
+  private options: RequestInit;
 
   constructor() {
     this.baseUrl = 'https://eodhd.com/api';

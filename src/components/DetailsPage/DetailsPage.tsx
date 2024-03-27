@@ -7,22 +7,18 @@ import { StoreContext } from '../../storeContext';
 const DetailsPage: React.FC = observer(() => {
   const navigate = useNavigate();
   const store = useContext(StoreContext);
+
   const { tickerId = '' } = useParams<{ tickerId: string }>();
+  const tickerData: Ticker | undefined = store.tickers[tickerId];
 
   useEffect(() => {
-    if (!store.tickers[tickerId]) navigate('/404');
-  }, [store, tickerId, navigate]);
-
-  const tickerData: Ticker = store.tickers[tickerId];
+    if (!tickerData) navigate('/404');
+  }, [tickerData, navigate]);
 
   if (!tickerData) return null;
 
   const {
-    id,
-    name,
-    price = 0,
-    change = 0,
-    volume = 0,
+    id, name, price = 0, change = 0, volume = 0,
   } = tickerData;
 
   return (
