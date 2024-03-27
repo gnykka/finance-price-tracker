@@ -19,7 +19,7 @@ describe('App.jsx', () => {
   });
 
   test('it renders DashboardDetailsPage for route "/:tickerId"', () => {
-    const ticker = store.tickers[0];
+    const ticker = Object.values(store.tickers)[0];
 
     window.history.pushState({}, '', `/${ticker.id}`);
 

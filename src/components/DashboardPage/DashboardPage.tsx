@@ -8,9 +8,9 @@ const DashboardPage: React.FC = observer(() => {
   const store = useContext(StoreContext);
 
   return (
-    <div className="h-full px-6 py-4">
+    <div className="h-full">
       <h1 className="mb-8">Tickers List</h1>
-      <table className="max-w-[800px]">
+      <table className="w-full max-w-screen-xl">
         <thead>
           <tr>
             <th>Ticker</th>
@@ -22,7 +22,7 @@ const DashboardPage: React.FC = observer(() => {
           </tr>
         </thead>
         <tbody>
-          {store.tickers.map(({
+          {Object.values(store.tickers).map(({
             id, name, price = 0, change = 0, volume = 0,
           }: Ticker) => (
             <tr key={id}>
