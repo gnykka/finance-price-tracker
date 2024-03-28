@@ -26,9 +26,10 @@ const Sparkline: React.FC<SparklineProps> = ({ history, width, height }) => {
   return (
     <svg width={width} height={height} className="overflow-visible ml-auto">
       <polyline
-        data-testid="sparkline-polyline"
-        className={`fill-none stroke-2 ${change >= 0 ? 'stroke-green' : 'stroke-red'}`}
+        data-testid="sparkline"
+        className={`fill-none stroke-2 ${change >= 0 ? 'stroke-green-800' : 'stroke-red-800'}`}
         points={points}
+        strokeLinejoin="round"
       />
     </svg>
   );

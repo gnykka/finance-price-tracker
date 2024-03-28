@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
 import Sparkline from '../Sparkline';
+import PriceCell from '../PriceCell';
 
 const DashboardPage: React.FC = observer(() => {
   const store = useContext(StoreContext);
@@ -29,9 +30,9 @@ const DashboardPage: React.FC = observer(() => {
             <tr key={id}>
               <td><Link to={`/${id}`}>{id}</Link></td>
               <td className="text-sm md:text-base">{name}</td>
-              <td className="numeric">${price.toFixed(2)}</td>
+              <PriceCell price={price} />
               <td className={`numeric hidden md:table-cell text-gray-400
-                              ${change > 0 && 'text-green'} ${change < 0 && 'text-red'}`}>
+                              ${change > 0 && 'text-green-800'} ${change < 0 && 'text-red-800'}`}>
                 {change.toFixed(2)}%
               </td>
               <td className="numeric hidden md:table-cell">{Intl.NumberFormat().format(volume)}</td>

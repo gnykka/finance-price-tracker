@@ -1,18 +1,11 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import { StoreContext } from '../../storeContext';
+import { StoreProvider } from '../../storeContext';
+import { TickerQuoteResponse, TickerHistoryItem } from '../../types';
 import * as ApiClient from '../../apiClient';
 import store from '../../store';
 import App from './App';
-
-const mockStore = {
-  tickers: {
-    TEST1: { id: 'TEST1', name: 'Test Ticker 1' },
-    TEST2: { id: 'TEST2', name: 'Test Ticker 2' },
-  },
-  updateTicker: () => {},
-};
 
 describe('App.jsx', () => {
   test('it renders DashboardPage for route "/"', () => {
@@ -56,17 +49,28 @@ describe('App.jsx', () => {
     expect(window.location.pathname).toEqual('/404');
   });
 
-  test('it loads and displays ticker data', async () => {
-    jest.spyOn(ApiClient, 'getTickerQuotes').mockResolvedValue([
+  test('it loads and displays ticker quote and history data', async () => {
+    const mockData: TickerQuoteResponse[] = [
       { close: 100.1234, previousClose: 99.5, change_p: 5.25, volume: 100000 },
       { close: 10.1, previousClose: 12.356, change_p: -15.3, volume: 1150000 },
-    ]);
+    ];
+    const mockHistoryData: TickerHistoryItem[] = [
+      { date: '1', close: 108, high: 110, low: 105, open: 106 },
+      { date: '2', close: 118, high: 120, low: 115, open: 116 },
+    ];
 
-    render(
+    const updateTickerSpy = jest.spyOn(store, 'updateTicker');
+
+    jest.spyOn(ApiClient, 'getTickerQuotes').mockResolvedValue(mockData);
+    jest.spyOn(ApiClient, 'getTickerData').mockResolvedValue(mockHistoryData);
+
+    window.history.pushState({}, '', '/');
+
+    const res = render(
       <BrowserRouter>
-        <StoreContext.Provider value={mockStore}>
+        <StoreProvider>
           <App />
-        </StoreContext.Provider>
+        </StoreProvider>
       </BrowserRouter>,
     );
 
@@ -76,8 +80,20 @@ describe('App.jsx', () => {
 
     await waitFor(() => expect(cover).toHaveClass('opacity-0 pointer-events-none'));
 
+    mockData.forEach((item: TickerQuoteResponse, index: number) => {
+      expect(updateTickerSpy).toHaveBeenCalledWith(Object.keys(store.tickers)[index], {
+        price: item.close,
+        prevPrice: item.previousClose,
+        change: item.change_p,
+        volume: item.volume,
+      });
+    });
+
+    expect(updateTickerSpy).toHaveBeenCalledWith(expect.anything(), { history: mockHistoryData });
+
     expect(screen.getByText('$100.12')).toBeInTheDocument();
     expect(screen.getByText('$10.10')).toBeInTheDocument();
+    expect(screen.getAllByTestId('sparkline').length).toEqual(Object.keys(store.tickers).length);
 
     jest.restoreAllMocks();
   });

@@ -29,9 +29,10 @@
     @apply w-full h-full font-primary bg-white text-base/2 text-gray-800;
   }
 
-  #root {
-    @apply w-full h-full;
+  footer {
+    @apply flex gap-3 px-6 py-2;
   }
+
 
   h1 {
     @apply h1;

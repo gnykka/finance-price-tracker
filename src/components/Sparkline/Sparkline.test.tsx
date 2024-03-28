@@ -11,9 +11,9 @@ describe('Sparkline', () => {
     ];
     render(<Sparkline history={mockHistory} width={100} height={50} />);
 
-    const polyline = screen.getByTestId('sparkline-polyline');
+    const polyline = screen.getByTestId('sparkline');
 
-    expect(polyline).toHaveClass('stroke-green');
+    expect(polyline).toHaveClass('stroke-green-800');
     expect(polyline).toHaveAttribute('points');
   });
 
@@ -25,9 +25,9 @@ describe('Sparkline', () => {
     ];
     render(<Sparkline history={mockHistory} width={100} height={50} />);
 
-    const polyline = screen.getByTestId('sparkline-polyline');
+    const polyline = screen.getByTestId('sparkline');
 
-    expect(polyline).toHaveClass('stroke-red');
+    expect(polyline).toHaveClass('stroke-red-800');
     expect(polyline).toHaveAttribute('points');
   });
 });

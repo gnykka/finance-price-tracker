@@ -63,14 +63,14 @@ const App: React.FC = () => {
   }, [store, handleTicketMessage]);
 
   return (
-    <main className="w-full h-full px-6 py-4">
+    <div className="w-full h-full px-6 py-4">
       <LoadingCover loading={loading}/>
       <Routes>
         <Route path="/" element={<DashboardPage />} />
         <Route path="/:tickerId" element={<DetailsPage />} />
         <Route path="/404" element={<NotFoundPage />} />
       </Routes>
-    </main>
+    </div>
   );
 };
 

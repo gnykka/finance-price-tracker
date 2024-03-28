@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
+import PriceCell from '../PriceCell';
 
 const DetailsPage: React.FC = observer(() => {
   const navigate = useNavigate();
@@ -35,12 +36,12 @@ const DetailsPage: React.FC = observer(() => {
           <tbody>
             <tr>
               <td>Price</td>
-              <td className="numeric">${price.toFixed(2)}</td>
+              <PriceCell price={price} />
             </tr>
             <tr>
               <td>Change</td>
-              <td className={`numeric text-gray-400 ${change > 0 && 'text-green'}
-                              ${change < 0 && 'text-red'}`}>
+              <td className={`numeric text-gray-400 ${change > 0 && 'text-green-800'}
+                              ${change < 0 && 'text-red-800'}`}>
                 {change.toFixed(2)}%
               </td>
             </tr>
