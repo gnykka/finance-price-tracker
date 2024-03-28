@@ -11,9 +11,10 @@ import {
   TickerQuoteResponse,
   WebSocketMessageItem,
   WebSocketMessage,
+  TickerHistoryItem,
 } from '../../types';
 import { StoreContext } from '../../storeContext';
-import { getTickerQuotes } from '../../apiClient';
+import { getTickerQuotes, getTickerData } from '../../apiClient';
 import TickerWebSocket from '../../websocket';
 
 const App: React.FC = () => {
@@ -48,6 +49,12 @@ const App: React.FC = () => {
         });
       });
       setLoading(false);
+    });
+
+    ids.forEach((id) => {
+      getTickerData(id).then((data: TickerHistoryItem[]) => {
+        store.updateTicker(id, { history: data });
+      });
     });
 
     const tickerWebSocket = new TickerWebSocket(ids, handleTicketMessage);

@@ -28,8 +28,8 @@ module.exports = {
     },
     fontSize: {
       inherit: 'inherit',
-      'base-sm': '16px',
-      'base-md': '18px',
+      'base-sm': '14px',
+      'base-md': '16px',
       sm: '0.8rem',
       base: '1rem',
       md: '1.25rem',

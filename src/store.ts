@@ -5,14 +5,14 @@ class Store {
   tickers: Record<string, Ticker> = {
     MSFT: { id: 'MSFT', name: 'Microsoft Corporation' },
     AAPL: { id: 'AAPL', name: 'Apple Inc.' },
-    // NVDA: { id: 'NVDA', name: 'NVIDIA Corporation' },
-    // GOOG: { id: 'GOOG', name: 'Alphabet Inc.' },
-    // AMZN: { id: 'AMZN', name: 'Amazon.com, Inc.' },
-    // META: { id: 'META', name: 'Meta Platforms, Inc.' },
-    // TSLA: { id: 'TSLA', name: 'Tesla, Inc.' },
-    // AMD: { id: 'AMD', name: 'Advanced Micro Devices, Inc.' },
-    // BABA: { id: 'BABA', name: 'Alibaba Group Holding Limited' },
-    // INTC: { id: 'INTC', name: 'Intel Corporation' },
+    NVDA: { id: 'NVDA', name: 'NVIDIA Corporation' },
+    GOOG: { id: 'GOOG', name: 'Alphabet Inc.' },
+    AMZN: { id: 'AMZN', name: 'Amazon.com, Inc.' },
+    META: { id: 'META', name: 'Meta Platforms, Inc.' },
+    TSLA: { id: 'TSLA', name: 'Tesla, Inc.' },
+    AMD: { id: 'AMD', name: 'Advanced Micro Devices, Inc.' },
+    BABA: { id: 'BABA', name: 'Alibaba Group Holding Limited' },
+    INTC: { id: 'INTC', name: 'Intel Corporation' },
   };
 
   constructor() {

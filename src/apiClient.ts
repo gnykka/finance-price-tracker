@@ -53,9 +53,10 @@ class ApiClient {
 
 const api = new ApiClient();
 
-/* eslint-disable import/prefer-default-export */
 export const getTickerQuotes = async (tickers: string[]) => {
   const [ticker, ...otherTickets] = tickers;
 
   return api.get(`/real-time/${ticker}`, { s: otherTickets.join(',') });
 };
+
+export const getTickerData = async (ticker: string) => api.get(`/eod/${ticker}`, { period: 'd' });

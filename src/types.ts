@@ -1,3 +1,11 @@
+export interface TickerHistoryItem {
+  date: string,
+  close: number,
+  high: number,
+  low: number,
+  open: number,
+}
+
 export interface Ticker {
   id: string;
   name: string;
@@ -5,6 +13,7 @@ export interface Ticker {
   prevPrice?:number;
   change?: number;
   volume?: number;
+  history?: TickerHistoryItem[];
 }
 
 export interface TickerQuoteResponse {

@@ -19,7 +19,7 @@ describe('DashboardPage', () => {
         <StoreContext.Provider value={mockStore}>
           <DashboardPage />
         </StoreContext.Provider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     expect(screen.getByText('Tickers List')).toBeInTheDocument();
