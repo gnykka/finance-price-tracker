@@ -41,6 +41,10 @@ class ApiClient {
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
 
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
+    }
+
     const result = await response.json();
 
     return result;

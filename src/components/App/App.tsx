@@ -39,22 +39,30 @@ const App: React.FC = () => {
   useEffect(() => {
     const ids: string[] = Object.keys(store.tickers);
 
-    getTickerQuotes(ids).then((data: TickerQuoteResponse[]) => {
-      data.forEach((item: TickerQuoteResponse, index: number) => {
-        store.updateTicker(ids[index], {
-          price: item.close,
-          prevPrice: item.previousClose,
-          change: item.change_p,
-          volume: item.volume,
+    getTickerQuotes(ids)
+      .then((data: TickerQuoteResponse[]) => {
+        data.forEach((item: TickerQuoteResponse, index: number) => {
+          store.updateTicker(ids[index], {
+            price: item.close,
+            prevPrice: item.previousClose,
+            change: item.change_p,
+            volume: item.volume,
+          });
         });
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
       });
-      setLoading(false);
-    });
 
     ids.forEach((id) => {
-      getTickerData(id).then((data: TickerHistoryItem[]) => {
-        store.updateTicker(id, { history: data });
-      });
+      getTickerData(id)
+        .then((data: TickerHistoryItem[]) => {
+          store.updateTicker(id, { history: data });
+        })
+        .catch(() => {
+          // no history was received and rendered
+        });
     });
 
     const tickerWebSocket = new TickerWebSocket(ids, handleTicketMessage);
