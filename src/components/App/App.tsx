@@ -21,6 +21,7 @@ const App: React.FC = () => {
   const store = useContext(StoreContext);
   const [loading, setLoading] = useState(true);
 
+  // Callback to parse Websocket messages and update the store
   const handleTicketMessage = useCallback((message: WebSocketMessage) => {
     const { data, type } = message;
 
@@ -36,9 +37,11 @@ const App: React.FC = () => {
     }
   }, [store]);
 
+  // Main useEffect to request and update the tickers data
   useEffect(() => {
     const ids: string[] = Object.keys(store.tickers);
 
+    // Get the quotes for the table and details, after — hide loading cover
     getTickerQuotes(ids)
       .then((data: TickerQuoteResponse[]) => {
         data.forEach((item: TickerQuoteResponse, index: number) => {
@@ -55,18 +58,21 @@ const App: React.FC = () => {
         setLoading(false);
       });
 
+    // For each ticker get the historical market data — available for the last year
     ids.forEach((id) => {
       getTickerData(id)
         .then((data: TickerHistoryItem[]) => {
           store.updateTicker(id, { history: data });
         })
         .catch(() => {
-          // no history was received and rendered
+          // No history was received and rendered
         });
     });
 
+    // Create Websocket connection and subscribe to our tickers
     const tickerWebSocket = new TickerWebSocket(ids, handleTicketMessage);
 
+    // Close connection on unmount
     return () => tickerWebSocket.close();
   }, [store, handleTicketMessage]);
 

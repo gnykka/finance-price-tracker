@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { Ticker } from './types';
 
 class Store {
+  // Initial store contains the tickers that we observe
   tickers: Record<string, Ticker> = {
     MSFT: { id: 'MSFT', name: 'Microsoft Corporation' },
     AAPL: { id: 'AAPL', name: 'Apple Inc.' },
@@ -19,6 +20,7 @@ class Store {
     makeAutoObservable(this);
   }
 
+  // Method to update store value with any new data from APIs
   updateTicker(tickerId: string, newData: Partial<Ticker>) {
     if (!this.tickers[tickerId]) return;
 

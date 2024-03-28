@@ -21,12 +21,14 @@ class ApiClient {
     };
   }
 
+  // Helper method to construct the request url from baseUrl, endpoint and query params
   url(endpoint: string, query: Params = {}): string {
     const url = new URL(`${this.baseUrl}${endpoint}`);
     url.search = new URLSearchParams(query).toString();
     return url.toString();
   }
 
+  // Basic method to fetch data
   async fetch({ endpoint, ...options }: FetchOptions): Promise<any> {
     const { query = {}, body, ...fetchOptions } = options;
     const defaultQuery = {
@@ -50,6 +52,7 @@ class ApiClient {
     return result;
   }
 
+  // Get method utilizes 'fetch' with specified params
   async get(endpoint: string, params: Params = {}): Promise<any> {
     return this.fetch({ endpoint, method: 'GET', query: params });
   }
@@ -57,10 +60,12 @@ class ApiClient {
 
 const api = new ApiClient();
 
+// Request to get the current data for the tickers
 export const getTickerQuotes = async (tickers: string[]) => {
   const [ticker, ...otherTickets] = tickers;
 
   return api.get(`/real-time/${ticker}`, { s: otherTickets.join(',') });
 };
 
+// Request to get historical data (the last year) for the ticker
 export const getTickerData = async (ticker: string) => api.get(`/eod/${ticker}`, { period: 'd' });

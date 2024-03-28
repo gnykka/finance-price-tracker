@@ -107,4 +107,8 @@
   .text-small {
     @apply text-sm/2;
   }
+
+  .pointer-events-all {
+    pointer-events: all;
+  }
 }

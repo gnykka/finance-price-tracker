@@ -1,5 +1,12 @@
 import '@testing-library/jest-dom';
 
+jest.mock('d3', () => ({
+  timeParse: jest.fn(),
+  bisector: jest.fn().mockImplementation(() => ({
+    left: 0,
+  })),
+}));
+
 class MockWebSocket {
   onopen = null;
   onmessage = null;
@@ -37,3 +44,17 @@ class MockWebSocket {
 }
 
 global.WebSocket = MockWebSocket;
+
+class ResizeObserver {
+  constructor(callback) {
+    this.callback = callback;
+  }
+
+  observe() {}
+
+  unobserve() {}
+
+  disconnect() {}
+}
+
+global.ResizeObserver = ResizeObserver;

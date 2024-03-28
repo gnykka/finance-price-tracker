@@ -4,14 +4,17 @@ import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
 import PriceCell from '../PriceCell';
+import MainChart from '../MainChart';
 
 const DetailsPage: React.FC = observer(() => {
   const navigate = useNavigate();
   const store = useContext(StoreContext);
 
+  // TickerId is always the url search parameter
   const { tickerId = '' } = useParams<{ tickerId: string }>();
   const tickerData: Ticker | undefined = store.tickers[tickerId];
 
+  // Redirect to 404 page if TicketId is not supported
   useEffect(() => {
     if (!tickerData) navigate('/404');
   }, [tickerData, navigate]);
@@ -19,20 +22,22 @@ const DetailsPage: React.FC = observer(() => {
   if (!tickerData) return null;
 
   const {
-    id, name, price = 0, change = 0, volume = 0,
+    id, name, price = 0, change = 0, volume = 0, history = [],
   } = tickerData;
 
   return (
-    <div>
+    <div className="w-full h-full flex flex-col">
       <div className="flex items-center mb-2 text-sm">
         <Link to="/">Dashboard</Link>
         <span className="px-1">/</span>
         <span className="uppercase">{id}</span>
       </div>
       <h1 className="mb-4">{name}</h1>
-      <div className="flex flex-col-reverse md:flex-row gap-4">
-        <div className="basis-full"/>
-        <table className="w-full max-w-[12em]">
+      <div className="basis-full flex flex-col-reverse md:flex-row gap-4">
+        <div className="h-full basis-full">
+          <MainChart history={history} />
+        </div>
+        <table className="w-full h-fit max-w-[12em]">
           <tbody>
             <tr>
               <td>Price</td>

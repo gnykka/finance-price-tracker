@@ -10,12 +10,15 @@ interface SparklineProps {
 const Sparkline: React.FC<SparklineProps> = ({ history, width, height }) => {
   if (!history || history.length < 2) return null;
 
+  // Line is created from close values for each day
   const data = history.map((v) => v.close);
 
+  // Calculate the min, max and their delta
   const maxValue = Math.max(...data);
   const minValue = Math.min(...data);
   const change = data[data.length - 1] - data[0];
 
+  // Construct the points string for the polyline with the simple scales [0, width] and [0, height]
   const points = data.map((value, index) => {
     const x = (index / (data.length - 1)) * width;
     const y = ((value - minValue) / (maxValue - minValue)) * height;
