@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { StoreProvider } from '../../storeContext';
-import { TickerQuoteResponse, TickerHistoryItem } from '../../types';
+import { TickerQuoteResponse, TickerHistoryItem, WebSocketMessage } from '../../types';
 import * as ApiClient from '../../apiClient';
 import store from '../../store';
 import App from './App';
@@ -66,7 +66,7 @@ describe('App.jsx', () => {
 
     window.history.pushState({}, '', '/');
 
-    const res = render(
+    render(
       <BrowserRouter>
         <StoreProvider>
           <App />
@@ -91,12 +91,10 @@ describe('App.jsx', () => {
 
     expect(updateTickerSpy).toHaveBeenCalledWith(expect.anything(), { history: mockHistoryData });
 
-    expect(screen.getByText('$100.12')).toBeInTheDocument();
-    expect(screen.getByText('$10.10')).toBeInTheDocument();
+    expect(screen.getByText('$100.1234')).toBeInTheDocument();
+    expect(screen.getByText('$10.1000')).toBeInTheDocument();
     expect(screen.getAllByTestId('sparkline').length).toEqual(Object.keys(store.tickers).length);
 
     jest.restoreAllMocks();
   });
-
-  test('it updates ticker data with WebSocket', async () => {});
 });

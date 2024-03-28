@@ -31,7 +31,7 @@ describe('DashboardPage', () => {
       expect(detailsLink).toHaveAttribute('href', `/${ticker.id}`);
       expect(screen.getByText(ticker.name)).toBeInTheDocument();
 
-      expect(screen.getByText(`$${ticker.price.toFixed(2)}`)).toBeInTheDocument();
+      expect(screen.getByText(`$${ticker.price.toFixed(4)}`)).toBeInTheDocument();
       expect(screen.getByText(`${ticker.change.toFixed(2)}%`)).toBeInTheDocument();
       expect(screen.getByText(Intl.NumberFormat().format(ticker.volume))).toBeInTheDocument();
     });
