@@ -60,7 +60,7 @@
     @apply w-full;
 
     th, td {
-      @apply px-2 font-normal text-left border-b;
+      @apply px-1 md:px-2 font-normal text-left border-b text-sm md:text-base;
     }
 
     th {

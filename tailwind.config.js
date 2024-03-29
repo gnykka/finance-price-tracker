@@ -30,6 +30,7 @@ module.exports = {
       inherit: 'inherit',
       'base-sm': '14px',
       'base-md': '16px',
+      xs: '0.6rem',
       sm: '0.8rem',
       base: '1rem',
       md: '1.25rem',

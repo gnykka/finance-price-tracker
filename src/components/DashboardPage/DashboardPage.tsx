@@ -36,7 +36,7 @@ const DashboardPage: React.FC = observer(() => {
         <thead>
           <tr>
             <th>Ticker</th>
-            <th className="text-sm md:text-base">Name</th>
+            <th>Name</th>
             <th className="text-right">Price</th>
             <th className="hidden md:table-cell text-right">Change</th>
             <th className="hidden md:table-cell text-right">Volume</th>
@@ -49,7 +49,7 @@ const DashboardPage: React.FC = observer(() => {
           }: Ticker) => (
             <tr key={id}>
               <td className="w-[5rem]"><Link to={`/${id}`}>{id}</Link></td>
-              <td className="w-1/3 text-sm md:text-base">{name}</td>
+              <td className="w-1/3 text-xs md:text-base">{name}</td>
               <td className="numeric">
                 <TickerPrice price={price} />
               </td>
@@ -58,7 +58,7 @@ const DashboardPage: React.FC = observer(() => {
                 {change.toFixed(2)}%
               </td>
               <td className="w-1/6 numeric hidden md:table-cell">{Intl.NumberFormat().format(volume)}</td>
-              <td className="w-[120px] h-[50px]">
+              <td className="max-w-[120px] h-[50px]">
                 <Sparkline
                   history={history.slice(-30)}
                   width={100}

@@ -65,7 +65,7 @@ const App: React.FC = () => {
   }, [store, handleTicketMessage]);
 
   return (
-    <div className="flex flex-col w-full h-full px-6 py-4">
+    <div className="flex flex-col w-full h-full px-3 py-4 md:px-6">
       <LoadingCover loading={loading}/>
       <div className="basis-full">
         <Routes>
