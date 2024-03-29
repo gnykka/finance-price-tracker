@@ -6,7 +6,7 @@ describe('LoadingCover', () => {
   test('it shows and hides the cover', async () => {
     const { rerender } = render(<LoadingCover loading={true} />);
 
-    expect(screen.getByTestId('loading-cover')).toHaveClass('opacity-100 pointer-events-auto');
+    expect(screen.getByTestId('loading-cover')).toHaveClass('opacity-30 pointer-events-auto');
 
     rerender(<LoadingCover loading={false} />);
 

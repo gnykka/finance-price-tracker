@@ -11,10 +11,9 @@ import {
   TickerQuoteResponse,
   WebSocketMessageItem,
   WebSocketMessage,
-  TickerHistoryItem,
 } from '../../types';
 import { StoreContext } from '../../storeContext';
-import { getTickerQuotes, getTickerData } from '../../apiClient';
+import { getTickerQuotes } from '../../apiClient';
 import TickerWebSocket from '../../websocket';
 
 const App: React.FC = () => {
@@ -57,17 +56,6 @@ const App: React.FC = () => {
       .catch((error) => {
         setLoading(false);
       });
-
-    // For each ticker get the historical market data — available for the last year
-    ids.forEach((id) => {
-      getTickerData(id)
-        .then((data: TickerHistoryItem[]) => {
-          store.updateTicker(id, { history: data });
-        })
-        .catch(() => {
-          // No history was received and rendered
-        });
-    });
 
     // Create Websocket connection and subscribe to our tickers
     const tickerWebSocket = new TickerWebSocket(ids, handleTicketMessage);

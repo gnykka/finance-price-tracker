@@ -68,4 +68,4 @@ export const getTickerQuotes = async (tickers: string[]) => {
 };
 
 // Request to get historical data (the last year) for the ticker
-export const getTickerData = async (ticker: string) => api.get(`/eod/${ticker}`, { period: 'd' });
+export const getTickerHistoryData = async (ticker: string) => api.get(`/eod/${ticker}`, { period: 'd' });

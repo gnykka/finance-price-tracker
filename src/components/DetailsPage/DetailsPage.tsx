@@ -1,11 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Ticker } from '../../types';
+import { observer } from 'mobx-react-lite';
+import { Ticker, TickerHistoryItem } from '../../types';
 import { StoreContext } from '../../storeContext';
+import { getTickerHistoryData } from '../../apiClient';
 import TickerPrice from '../TickerPrice';
 import MainChart from '../MainChart';
 
-const DetailsPage: React.FC = () => {
+const DetailsPage: React.FC = observer(() => {
   const navigate = useNavigate();
   const store = useContext(StoreContext);
 
@@ -15,8 +17,18 @@ const DetailsPage: React.FC = () => {
 
   // Redirect to 404 page if TicketId is not supported
   useEffect(() => {
-    if (!tickerData) navigate('/404');
-  }, [tickerData, navigate]);
+    if (!tickerData) {
+      navigate('/404');
+    } else if (!tickerData.history) {
+      getTickerHistoryData(tickerId)
+        .then((data: TickerHistoryItem[]) => {
+          store.updateTicker(tickerId, { history: data });
+        })
+        .catch(() => {
+          // No history was received and rendered
+        });
+    }
+  }, [store, tickerData, tickerId, navigate]);
 
   if (!tickerData) return null;
 
@@ -26,14 +38,14 @@ const DetailsPage: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col">
+      <h1 className="mb-4">{name}</h1>
       <div className="flex items-center mb-2 text-sm">
         <Link to="/">Dashboard</Link>
         <span className="px-1">/</span>
         <span className="uppercase">{id}</span>
       </div>
-      <h1 className="mb-4">{name}</h1>
       <div className="basis-full flex flex-col-reverse md:flex-row gap-4">
-        <div className="h-full basis-full">
+        <div className="max-w-screen-lg h-full basis-full">
           <MainChart history={history} />
         </div>
         <table className="w-full h-fit max-w-[12em]">
@@ -60,6 +72,6 @@ const DetailsPage: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default DetailsPage;

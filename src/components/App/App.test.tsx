@@ -62,7 +62,7 @@ describe('App.jsx', () => {
     const updateTickerSpy = jest.spyOn(store, 'updateTicker');
 
     jest.spyOn(ApiClient, 'getTickerQuotes').mockResolvedValue(mockData);
-    jest.spyOn(ApiClient, 'getTickerData').mockResolvedValue(mockHistoryData);
+    jest.spyOn(ApiClient, 'getTickerHistoryData').mockResolvedValue(mockHistoryData);
 
     window.history.pushState({}, '', '/');
 
@@ -76,7 +76,7 @@ describe('App.jsx', () => {
 
     const cover = screen.getByTestId('loading-cover');
 
-    expect(cover).toHaveClass('opacity-100 pointer-events-auto');
+    expect(cover).toHaveClass('opacity-30 pointer-events-auto');
 
     await waitFor(() => expect(cover).toHaveClass('opacity-0 pointer-events-none'));
 

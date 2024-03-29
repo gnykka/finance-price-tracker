@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-Follow these steps to get the app running on your local machine:
+Follow these steps to get the app running on your machine:
 
 ```bash
 # Clone the repository
@@ -41,9 +41,9 @@ I like the approach of utility-first classes and although sometimes the elements
 
 ### State Management
 
-I used React Context for state management.
+I used MobX and React Context for state management.
 
-At first I tried MobX but in the end I understood that it would be an overkill: small application with simple store won't have a lot of rerenderings anyway.
+I tried MobX out of interest cause I didn't work with it before. And it appeared to be a powerfull tool. I didn't dig further into the benefits but I noticed less boilerplates and out of the box updates for collections.
 
 ### Price API and WebSocket
 
@@ -52,6 +52,8 @@ I used two different APIs for price data and websocket connection.
 I couldn't find good free API that supports both, so I combined two:
 1. [Finnhub.io](https://finnhub.io) for WebSocket updates.
 2. [EODHD](https://eodhd.com) for historical and current data. The data has limitations and delay but that is not a problem for a test application.
+
+The data loading is divided into 2 parts. The first is getting the quotes, current values. This request is done in App component. The second request is for historical data. I moved it to the pages for optimization. The Details page gets only the displayed ticket's history (if it's missing), while the Dashboard page loads all missing histories. This is done for Details page: so that it won't render not related historical data.
 
 ### Visualizations
 
@@ -69,4 +71,4 @@ I focused on integration tests as in my opinion these are the main tests for fro
 
 ### Eslint
 
-I'm used to relying on Eslint to check my code styles. So I set it up in every project, usually with the basic set of rules. Here it was even more important cause I used Typescript.
+I'm used to relying on Eslint to check my code styles. So I set it up in every project, usually with the basic set of rules. Here it was even more important cause I used Typescript and needed to at least ensure I won't forget to specify the types.

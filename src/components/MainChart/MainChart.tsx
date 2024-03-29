@@ -191,6 +191,8 @@ const MainChart: React.FC<ChartProps> = ({ history = [] }) => {
         <circle
           ref={cursorRef}
           r={3}
+          cx={-10}
+          cy={-10}
           className={`fill-accent-800 stroke-none ${hovered ? 'visible' : 'invisible'}`}
         />
       </g>
