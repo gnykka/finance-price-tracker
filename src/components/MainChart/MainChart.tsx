@@ -29,6 +29,8 @@ const MainChart: React.FC<ChartProps> = ({ history = [] }) => {
   const cursorRef = useRef<SVGCircleElement>(null);
   const vLineRef = useRef<SVGLineElement>(null);
   const hLineRef = useRef<SVGLineElement>(null);
+  const dateTextRef = useRef<SVGTextElement>(null);
+  const closeTextRef = useRef<SVGTextElement>(null);
 
   // Hovered state — show or hide the cursor point and lines
   const [hovered, setHovered] = useState(false);
@@ -157,6 +159,15 @@ const MainChart: React.FC<ChartProps> = ({ history = [] }) => {
           .attr('x2', chartWidth + margin.left)
           .attr('y1', screenY + margin.top)
           .attr('y2', screenY + margin.top);
+
+        d3.select(dateTextRef.current)
+          .attr('x', screenX + margin.left)
+          .text(d3.timeFormat('%-d %b %Y')(closestDataDate));
+
+        d3.select(closeTextRef.current)
+          .attr('x', chartWidth + margin.left)
+          .attr('y', screenY + margin.top - 4)
+          .text(closestData.close.toFixed(2));
       });
   }, [history]);
 
@@ -194,6 +205,17 @@ const MainChart: React.FC<ChartProps> = ({ history = [] }) => {
           cx={-10}
           cy={-10}
           className={`fill-accent-800 stroke-none ${hovered ? 'visible' : 'invisible'}`}
+        />
+        <text
+          ref={dateTextRef}
+          textAnchor="middle"
+          y={margin.top - 4}
+          className={`font-bold fill-accent-800 text-[0.7rem] ${hovered ? 'visible' : 'invisible'}`}
+        />
+        <text
+          ref={closeTextRef}
+          textAnchor="end"
+          className={`font-bold fill-accent-800 text-[0.7rem] ${hovered ? 'visible' : 'invisible'}`}
         />
       </g>
       <rect

@@ -63,7 +63,7 @@ The sparklines are native svg charts, done without any dependencies. It’s a si
 
 I used D3.js for the main chart on Details page. The choice came from my personal experience: I worked a lot with D3 and have ready to use code snippets. Although personally in production environment with large data I wouldn’t choose D3. The main reason is the size and complexity of the library, it’s too low-level, better for more complex and custom data visualizations.
 
-Unfortunately I didn’t have enough time to fully implement the chart. The improvements that I have in mind are: replace the line with candlesticks, show the tooltip and maybe add a brush component to zoom and pan the chart.
+Unfortunately I didn’t have enough time to fully implement the chart. The improvements that I have in mind are: replace the line with candlesticks and maybe add a brush component to zoom and pan the chart.
 
 ### Jest and React Testing Library
 
