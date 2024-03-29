@@ -1,4 +1,3 @@
-import { makeAutoObservable } from 'mobx';
 import { Ticker } from './types';
 
 class Store {
@@ -15,10 +14,6 @@ class Store {
     BABA: { id: 'BABA', name: 'Alibaba Group Holding Limited' },
     INTC: { id: 'INTC', name: 'Intel Corporation' },
   };
-
-  constructor() {
-    makeAutoObservable(this);
-  }
 
   // Method to update store value with any new data from APIs
   updateTicker(tickerId: string, newData: Partial<Ticker>) {

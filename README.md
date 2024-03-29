@@ -27,19 +27,23 @@ npm test
 
 ### Typescript and React
 
-I used `create-react-app` to initially setup the application. That was done to simplify the process.
+I used `create-react-app` to initially setup the application and simplify the process.
 
-I liked Typescript and now I can see a lot of advantages for its usage. Before, I had not so good experience with it, mostly with Angular and I think Angular spoiled it for me a little. Typescript helps to write more solid and self-commented code and is very usefull in teams espessially with junior developers. Although I still think it's too much of a boilerplate for personal or smaller projects.
+I liked Typescript and now I can see a lot of advantages for its usage. Before, I had not so good experience with it, mostly with Angular and I think Angular spoiled it for me a little.
+
+Typescript helps to write more solid and self-commented code and is very usefull in teams especially with junior developers. Although I still think it's too much of a boilerplate for personal or smaller projects and would use basic Javascript for these purposes.
 
 ### TailwindCSS
 
-This was an easy choice, I use Tailwind a lot for the last several years and I like it. It's easy to setup and easy to use. I try to have as less styles as possible ans Tailwind allows me to.
+I used TailwindCSS as the style framework. I build design systems with Tailwind for the last several years and I quite like it.
 
-### MobX
+I like the approach of utility-first classes and although sometimes the elements class lists can become long it's still way less custom css code.
 
-I used MobX for the state management. I choose it out of interest cause I wanted to try something new here. And I liked the simplicity of the boilerplate, it's similar to how store is done in Svelte: observable states, automatically tracking changes and better performance.
+### State Management
 
-I went with a single object for the store for simplicity. It is updated on the App level and each component can use it. The first version was a simple array of tickers, but object appeared to be easier to update and search in.
+I used React Context for state management.
+
+At first I tried MobX but in the end I understood that it would be an overkill: small application with simple store won't have a lot of rerenderings anyway.
 
 ### Price API and WebSocket
 

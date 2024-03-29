@@ -77,13 +77,19 @@ const App: React.FC = () => {
   }, [store, handleTicketMessage]);
 
   return (
-    <div className="w-full h-full px-6 py-4">
+    <div className="flex flex-col w-full h-full px-6 py-4">
       <LoadingCover loading={loading}/>
-      <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/:tickerId" element={<DetailsPage />} />
-        <Route path="/404" element={<NotFoundPage />} />
-      </Routes>
+      <div className="basis-full">
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/:tickerId" element={<DetailsPage />} />
+          <Route path="/404" element={<NotFoundPage />} />
+        </Routes>
+      </div>
+      <div className="flex gap-3 pt-2">
+        © 2024
+        <a href="https://github.com/gnykka/finance-price-tracker">Github</a>
+      </div>
     </div>
   );
 };

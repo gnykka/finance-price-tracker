@@ -21,17 +21,16 @@
   }
 
   html {
-    @apply w-full h-full text-base-sm md:text-base-md scroll-smooth;
+    @apply w-full h-full scroll-smooth;
   }
 
   body {
     @apply w-full h-full font-primary bg-white text-base/2 text-gray-800;
   }
 
-  footer {
-    @apply flex gap-3 px-6 py-2;
+  main {
+    @apply w-full h-full;
   }
-
 
   h1 {
     @apply h1;

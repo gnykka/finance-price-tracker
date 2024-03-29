@@ -1,12 +1,11 @@
 import React, { useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
 import TickerPrice from '../TickerPrice';
 import MainChart from '../MainChart';
 
-const DetailsPage: React.FC = observer(() => {
+const DetailsPage: React.FC = () => {
   const navigate = useNavigate();
   const store = useContext(StoreContext);
 
@@ -61,6 +60,6 @@ const DetailsPage: React.FC = observer(() => {
       </div>
     </div>
   );
-});
+};
 
 export default DetailsPage;

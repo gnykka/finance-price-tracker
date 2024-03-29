@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
 import Sparkline from '../Sparkline';
 import TickerPrice from '../TickerPrice';
 
-const DashboardPage: React.FC = observer(() => {
+const DashboardPage: React.FC = () => {
   const store = useContext(StoreContext);
 
   return (
@@ -51,6 +50,6 @@ const DashboardPage: React.FC = observer(() => {
       </table>
     </div>
   );
-});
+};
 
 export default DashboardPage;
