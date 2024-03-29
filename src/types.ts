@@ -1,4 +1,4 @@
-export interface TickerHistoryItem {
+export type TickerHistoryItem = {
   date: string,
   close: number,
   high: number,
@@ -6,7 +6,7 @@ export interface TickerHistoryItem {
   open: number,
 }
 
-export interface Ticker {
+export type Ticker = {
   id: string;
   name: string;
   price?: number;
@@ -16,19 +16,19 @@ export interface Ticker {
   history?: TickerHistoryItem[];
 }
 
-export interface TickerQuoteResponse {
+export type TickerQuoteResponse = {
   change_p: number;
   close: number;
   previousClose: number;
   volume: number;
 }
 
-export interface WebSocketMessageItem {
+export type WebSocketMessageItem = {
   p: number,
   s: string,
 }
 
-export interface WebSocketMessage {
+export type WebSocketMessage = {
   data: WebSocketMessageItem[],
   type: string,
 }

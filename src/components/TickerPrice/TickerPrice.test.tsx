@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, act } from '@testing-library/react';
-import PriceCell from './PriceCell';
+import TickerPrice from './TickerPrice';
 
-describe('PriceCell', () => {
+describe('TickerPrice', () => {
   jest.useFakeTimers();
 
   const getCellLayout = (price: number) => (
     <table>
       <tbody>
         <tr>
-          <PriceCell price={price} />
+          <TickerPrice price={price} />
         </tr>
       </tbody>
     </table>

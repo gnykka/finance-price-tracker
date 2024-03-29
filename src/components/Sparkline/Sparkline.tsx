@@ -1,7 +1,7 @@
 import React from 'react';
 import { TickerHistoryItem } from '../../types';
 
-interface SparklineProps {
+type SparklineProps = {
   history: TickerHistoryItem[];
   width: number;
   height: number;

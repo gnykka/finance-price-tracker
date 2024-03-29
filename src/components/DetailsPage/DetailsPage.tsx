@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { Ticker } from '../../types';
 import { StoreContext } from '../../storeContext';
-import PriceCell from '../PriceCell';
+import TickerPrice from '../TickerPrice';
 import MainChart from '../MainChart';
 
 const DetailsPage: React.FC = observer(() => {
@@ -41,7 +41,9 @@ const DetailsPage: React.FC = observer(() => {
           <tbody>
             <tr>
               <td>Price</td>
-              <PriceCell price={price} />
+              <td className="numeric">
+                <TickerPrice price={price} />
+              </td>
             </tr>
             <tr>
               <td>Change</td>

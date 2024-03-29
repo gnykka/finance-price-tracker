@@ -4,7 +4,7 @@ import React, {
 import * as d3 from 'd3';
 import { TickerHistoryItem } from '../../types';
 
-interface ChartProps {
+type ChartProps = {
   history: TickerHistoryItem[];
 }
 

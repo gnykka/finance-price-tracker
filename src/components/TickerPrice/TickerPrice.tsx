@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-interface PriceCellProps {
+type TickerPriceProps = {
   price: number;
 }
 
 const highlightTimeout = 1000;
 
-const PriceCell: React.FC<PriceCellProps> = ({ price }) => {
+const TickerPrice: React.FC<TickerPriceProps> = ({ price }) => {
   const [prevPrice, setPrevPrice] = useState(price);
   const [highlightClass, setHighlightClass] = useState('');
 
@@ -32,10 +32,8 @@ const PriceCell: React.FC<PriceCellProps> = ({ price }) => {
   }, [price, prevPrice]);
 
   return (
-    <td className="numeric">
-      <span className={highlightClass}>${price.toFixed(4)}</span>
-    </td>
+    <span className={highlightClass}>${price.toFixed(4)}</span>
   );
 };
 
-export default PriceCell;
+export default TickerPrice;
